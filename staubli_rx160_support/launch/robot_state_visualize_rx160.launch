@@ -1,0 +1,25 @@
+<!--
+	Manipulator specific version of the state visualizer.
+
+	Defaults provided for RX160:
+	 - 6 joints
+
+	Usage:
+		robot_state_visualize_rx160.launch robot_ip:=<value>
+-->
+<launch>
+	<arg name="robot_ip" />
+
+	<rosparam command="load" file="$(find staubli_rx160_support)/config/joint_names_rx160.yaml" />
+
+	<include file="$(find staubli_val3_driver)/launch/robot_state.launch">
+		<arg name="robot_ip" value="$(arg robot_ip)" />
+	</include>
+
+	<node name="robot_state_publisher" pkg="robot_state_publisher" 
+		type="robot_state_publisher" />
+
+	<include file="$(find staubli_rx160_support)/launch/load_rx160.launch" />
+
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find industrial_robot_client)/config/robot_state_visualize.rviz" required="true" />
+</launch>
