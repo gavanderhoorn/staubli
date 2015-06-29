@@ -19,3 +19,6 @@ CATKIN_IGNORE*
 .pydevproject
 .project
 .cproject
+
+# ROS MoveIt
+default_warehouse_mongo_db/
